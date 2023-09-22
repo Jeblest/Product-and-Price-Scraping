@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "build": "node fetch.js",
+  "build": "npm install",
   "keywords": [],
   "author": "",
   "license": "ISC",
