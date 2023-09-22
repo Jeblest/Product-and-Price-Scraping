@@ -6,6 +6,10 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 app.use(morgan('dev'));
 
+app.get("/", (req, res) => {
+  res.send("Server running")
+})
+
 app.get('/api/data', async (req, res) => {
   const { data } = req.query;
   try {
@@ -18,6 +22,8 @@ app.get('/api/data', async (req, res) => {
 
 app.get("/api/price", async (req, res) => {
   const { data } = req.query;
+  console.log("Data received: " + data)
+
   try {
     const result = await getPrice(data);
     return res.json(result);
