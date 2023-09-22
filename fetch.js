@@ -35,7 +35,7 @@ app.get("/api/price", async (req, res) => {
     const price = $(".MainOfferCard_price_container__22jHp").text();
     return res.json(price);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    return res.json({ error: error.message });
   }
 })
 
