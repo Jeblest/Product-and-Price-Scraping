@@ -27,7 +27,7 @@ app.get("/api/price", async (req, res) => {
   console.log("Data received: " + data)
 
   try {
-    const price = getPrice();
+    const price = await getPrice();
     console.log(price)
     return res.json(price);
   } catch (error) {
