@@ -27,12 +27,7 @@ app.get("/api/price", async (req, res) => {
   console.log("Data received: " + data)
 
   try {
-    const res = await axios(`https://www.cimri.com/market/arama?q=${data}&sort=price-asc`);
-    const main = cheerio.load(res.data);
-    const link = main(".ProductCard_productCard__412iI a").attr("href");
-    const res1 = await axios("https://www.cimri.com" + link);
-    const $ = cheerio.load(res1.data);
-    const price = $(".MainOfferCard_price_container__22jHp").text();
+    const price = getPrice();
     return res.json(price);
   } catch (error) {
     return res.json({ error: error.message });
