@@ -48,7 +48,6 @@ async function fetch(data) {
     const title = $('.card-body center h1').text();
     const barcode = $('.card-body h3').text();
     const result = $('.card-body .card center h4').text();
-
     return {
       title,
       barcode,
@@ -61,10 +60,10 @@ async function fetch(data) {
 
 const getPrice = async (data) => {
   try {
-    const res = await axios(`https://www.cimri.com/market/arama?q=${data}&sort=price-asc`);
+    const res = await axios.get(`https://www.cimri.com/market/arama?q=${data}&sort=price-asc`);
   const main = cheerio.load(res.data);
   const link = main(".ProductCard_productCard__412iI a").attr("href");
-  const res1 = await axios("https://www.cimri.com" + link);
+  const res1 = await axios.get("https://www.cimri.com" + link);
   const $ = cheerio.load(res1.data);
   const price = $(".MainOfferCard_price_container__22jHp").text();
   return price
