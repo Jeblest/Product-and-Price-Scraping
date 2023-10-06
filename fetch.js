@@ -6,7 +6,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 app.use(morgan('dev'));
 
-app.use(cors({origin: 'https://www.cimri.com'}));
+app.use(cors({origin: '*'}));
 
 app.get("/", (req, res) => {
   res.send("Server running")
@@ -68,7 +68,7 @@ const getPrice = async (data) => {
   try {
     const res = await axios.get(`https://www.cimri.com/market/arama?q=${data}&sort=price-asc`, axiosConfig);
   const main = cheerio.load(res.data);
-  const link = main(".ProductCard_productCard__412iI a").attr("href");
+  const link = main(".ProductCard_produc`tCard__412iI a").attr("href");
   const res1 = await axios.get("https://www.cimri.com" + link, axiosConfig);
   const $ = cheerio.load(res1.data);
   const price = $(".MainOfferCard_price_container__22jHp").text();
