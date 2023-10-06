@@ -6,7 +6,7 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 app.use(morgan('dev'));
 
-app.use(cors())
+app.use(cors({origin: '*'}));
 
 app.get("/", (req, res) => {
   res.send("Server running")
