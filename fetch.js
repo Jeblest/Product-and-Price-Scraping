@@ -58,16 +58,27 @@ async function fetch(data) {
   }
 }
 
+const axiosConfig = {
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+  },
+};
+
 const getPrice = async (data) => {
   try {
-    const res = await axios.get(`https://www.cimri.com/market/arama?q=${data}&sort=price-asc`);
+    const res = await axios.get(`https://www.cimri.com/market/arama?q=${data}&sort=price-asc`, axiosConfig);
   const main = cheerio.load(res.data);
   const link = main(".ProductCard_productCard__412iI a").attr("href");
-  const res1 = await axios.get("https://www.cimri.com" + link);
+  const res1 = await axios.get("https://www.cimri.com" + link, axiosConfig);
   const $ = cheerio.load(res1.data);
   const price = $(".MainOfferCard_price_container__22jHp").text();
   return price
   } catch (error) {
+    console.error("Error in getPrice function:", error);
+    if (error.response && error.response.status === 403) {
+      await new Promise(resolve => setTimeout(resolve, 5000)); 
+      return getPrice(data);
+    }
     throw error;
   }
   
