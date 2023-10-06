@@ -69,11 +69,12 @@ const getPrice = async (data) => {
     const res = await axios.get(`https://www.cimri.com/market/arama?q=${data}&sort=price-asc`, axiosConfig);
     const main = cheerio.load(res.data);
     const link = main(".ProductCard_productCard__412iI a").attr("href");
-    const res1 = await axios.get("https://www.cimri.com" + link, axiosConfig);
+    return link
+/*     const res1 = await axios.get("https://www.cimri.com" + link, axiosConfig);
     const $ = cheerio.load(res1.data);
     const price = $(".MainOfferCard_price_container__22jHp").text();
     console.log(price)
-    return price
+    return price */
   } catch (error) {
 
     throw error;
