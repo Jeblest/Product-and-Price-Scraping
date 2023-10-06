@@ -58,11 +58,7 @@ async function fetch(data) {
   }
 }
 
-const axiosConfig = {
-  headers: {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
-  },
-};
+
 
 const getPrice = async (data) => {
   try {
@@ -74,11 +70,7 @@ const getPrice = async (data) => {
   const price = $(".MainOfferCard_price_container__22jHp").text();
   return price
   } catch (error) {
-    console.error("Error in getPrice function:", error);
-    if (error.response && error.response.status === 403) {
-      await new Promise(resolve => setTimeout(resolve, 5000)); 
-      return getPrice(data);
-    }
+    
     throw error;
   }
   
